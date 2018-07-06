@@ -29,7 +29,7 @@ class Menu extends React.Component {
     menuState: STATES.HIDDEN,
 
     top: 0,
-    left: 0,
+    end: 0,
 
     menuWidth: 0,
     menuHeight: 0,
@@ -87,7 +87,7 @@ class Menu extends React.Component {
 
   show = () => {
     this._container.measureInWindow((x, y) => {
-      this.setState({ menuState: STATES.SHOWN, top: y, left: x });
+      this.setState({ menuState: STATES.SHOWN, top: y, end: x });
     });
   };
 
@@ -124,16 +124,16 @@ class Menu extends React.Component {
     };
 
     // Adjust position of menu
-    let { left, top } = this.state;
+    let { end, top } = this.state;
     const transforms = [];
 
     // Flip by X axis if menu hits right screen border
-    if (left > dimensions.width - this.state.menuWidth - SCREEN_INDENT) {
+    if (end > dimensions.width - this.state.menuWidth - SCREEN_INDENT) {
       transforms.push({
         translateX: Animated.multiply(menuSizeAnimation.x, -1),
       });
 
-      left += this.state.buttonWidth;
+      end += this.state.buttonWidth;
     }
 
     // Flip by Y axis if menu hits bottom screen border
@@ -148,7 +148,7 @@ class Menu extends React.Component {
     const shadowMenuContainerStyle = {
       opacity: this.state.opacityAnimation,
       transform: transforms,
-      left,
+      end,
       top,
     };
 

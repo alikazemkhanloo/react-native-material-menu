@@ -20,7 +20,6 @@ function MenuItem({
       underlayColor={underlayColor}
     >
       <Text
-        ellipsizeMode="clip"
         numberOfLines={1}
         style={[
           styles.title,
